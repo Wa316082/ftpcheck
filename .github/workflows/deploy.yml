@@ -11,7 +11,7 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2.3.2
       - name: 🚀 Deploy to FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        uses: easingthemes/ssh-deploy@main
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REMOTE_HOST: rafflestag-australia.com
