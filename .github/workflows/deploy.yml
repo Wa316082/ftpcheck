@@ -13,7 +13,6 @@ jobs:
       - name: 🚀 Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: ftp.rafflestag-australia.com
-          username: rafflesau@backend.rafflestag-australia.com
-          password: sA({ItU{@q;h
-          server-dir: /
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: rafflestag-australia.com
+          REMOTE_USER: rafflesau
