@@ -19,8 +19,8 @@ jobs:
           known_hosts: "Started known host"
 
       - name: Adding Known Hosts
-        run: ssh-keyscan -p 65002 -H rafflestag-australia.com >> ~/.ssh/known_hosts
+        run: ssh-keyscan -p 65002 -H backend.rafflestag-australia.com >> ~/.ssh/known_hosts
 
       - name: Deploy with rsync
         run: |
-          rsync -e "ssh -p 65002" -a --exclude-from='./deploy.ignore' ./ rafflesau@rafflestag-australia.com:/home/rafflesau/rafflestag-australia.com
+          rsync -e "ssh -p 65002" -a --exclude-from='./deploy.ignore' ./ rafflesau@backend.rafflestag-australia.com:/home/rafflesau/public_html/backend.rafflestag-australia.com
