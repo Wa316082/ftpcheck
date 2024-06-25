@@ -2,7 +2,7 @@ name: 🚀 Deploy website on push to production
 on:
   push:
     branches:
-      - staging
+      - main
 
 jobs:
   web-deploy:
