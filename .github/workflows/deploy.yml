@@ -17,7 +17,7 @@ jobs:
         run: sudo apt-get install openssh-client -y
 
       - name: Deploy over SSH
-        uses: appleboy/ssh-action@main
+        uses: appleboy/ssh-action@master
         with:
           host: core.rafflestag.com
           username: rafflesau
