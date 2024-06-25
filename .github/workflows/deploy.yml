@@ -2,17 +2,25 @@ name: 🚀 Deploy website on push to production
 on:
   push:
     branches:
-      - main
+      - staging
+
 jobs:
   web-deploy:
-    name: Deploy
+    name: Deploy Staging Server
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v2.3.2
-      - name: 🚀 Deploy to FTP
-        uses: easingthemes/ssh-deploy@main
+      - name: checking out source code
+        uses: actions/checkout@v3
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          REMOTE_HOST: rafflestag-australia.com
-          REMOTE_USER: rafflesau
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: "Started known host"
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -p 65002 -H rafflestag-australia.com >> ~/.ssh/known_hosts
+
+      - name: Deploy with rsync
+        run: |
+          rsync -e "ssh -p 65002" -a --exclude-from='./deploy.ignore' ./ rafflesau@rafflestag-australia.com:/home/rafflesau/rafflestag-australia.com
